@@ -36,4 +36,10 @@ describe('Feature Test:', function(){
     expect(airport.planes()).toContain(plane);
   });
 
+  it('prevents planes from landing when stormy', function() {
+    spyOn(airport, 'isStormy').and.returnValue(true);
+    expect(function () {plane.land(airport);}).toThrowError('Cannot land during storm');
+    expect(airport.planes()).not.toContain(plane);
+  });
+
 });
