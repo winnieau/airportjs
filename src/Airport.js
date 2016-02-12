@@ -11,8 +11,15 @@ Airport.prototype.clearForLanding = function(plane) {
 };
 
 Airport.prototype.clearForTakeoff = function(plane) {
-  var index = this._hangar.indexOf(plane);
+ if (this.isStormy()) {
+   throw new Error('Cannot take off during storm');
+ }
+ var index = this._hangar.indexOf(plane);
   if (index > -1) {
     this._hangar.splice(index, 1);
   }
+};
+
+Airport.prototype.isStormy = function() {
+  return false;
 };

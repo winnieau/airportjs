@@ -25,11 +25,15 @@ describe('Feature Test:', function(){
     plane.land(airport);
     plane2 = new Plane("Winnie");
     plane2.land(airport);
-    console.log(airport.planes());
-    console.table(airport.planes());
     plane.takeoff();
-    console.log(airport.planes());
     expect(airport.planes()).not.toContain(plane);
+  });
+
+  it('prevents planes from taking off when stormy', function() {
+    plane.land(airport);
+    spyOn(airport, 'isStormy').and.returnValue(true);
+    expect(function () {plane.takeoff();}).toThrowError('Cannot take off during storm');
+    expect(airport.planes()).toContain(plane);
   });
 
 });

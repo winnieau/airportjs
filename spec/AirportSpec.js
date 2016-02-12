@@ -32,4 +32,13 @@ describe('Airport', function(){
     expect(airport.planes()).toEqual([plane2]);
   });
 
+  it('knows whether it is stormy', function() {
+    expect(airport.isStormy()).toBe(false);
+  });
+
+  it('throws an error if plane tries to takeoff while stormy', function() {
+    spyOn(airport, 'isStormy').and.returnValue(true);
+    expect(function () {airport.clearForTakeoff(plane);}).toThrowError('Cannot take off during storm');
+  });
+
 });
