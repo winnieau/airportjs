@@ -1,7 +1,7 @@
-function Airport () {
+function Airport (defaultCapacity) {
   this._hangar = [];
   this.weather = new Weather();
-  this.capacity = 3;
+  this.capacity = defaultCapacity;
 }
 
 Airport.prototype.planes = function() {

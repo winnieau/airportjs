@@ -35,7 +35,6 @@ describe('Airport', function(){
     expect(airport.planes()).toEqual([plane2]);
   });
 
-
   it('throws an error if plane tries to takeoff while stormy', function() {
     spyOn(Math, 'random').and.returnValue(0);
     spyOn(airport.weather, 'isStormy').and.returnValue(true);

@@ -7,7 +7,7 @@ describe('Feature Test:', function(){
 
   beforeEach(function(){
     plane = new Plane("Josh");
-    airport = new Airport();
+    airport = new Airport(3);
   });
 
   it('planes can be instructed to land at an airport', function(){
@@ -51,6 +51,17 @@ describe('Feature Test:', function(){
     spyOn(airport, 'isFull').and.returnValue(true);
     expect(function () {plane.land(airport);}).toThrowError('Airport is full');
     expect(airport.planes()).not.toContain(plane);
+  });
+
+  it('has a default capacity that can be overwritten', function(){
+    spyOn(Math, 'random').and.returnValue(0);
+    plane.land(airport);
+    plane.land(airport);
+    plane.land(airport);
+    expect(airport.isFull()).toBe(true);
+    airport.capacity = 4;
+    expect(airport.isFull()).toBe(false);
+
   });
 
 });
