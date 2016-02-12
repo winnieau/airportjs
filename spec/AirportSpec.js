@@ -47,4 +47,10 @@ describe('Airport', function(){
     expect(function () {airport.clearForLanding(plane);}).toThrowError('Cannot land during storm');
   });
 
+  it('prevents planes from landing when airport is full', function(){
+    spyOn(Math, 'random').and.returnValue(0);
+    spyOn(airport, 'isFull').and.returnValue(true);
+    expect(function () {airport.clearForLanding(plane);}).toThrowError('Airport is full');
+  });
+
 });
